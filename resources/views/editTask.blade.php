@@ -25,33 +25,37 @@
     </nav>
 
     <div class="p-5">
-          <h1 class="text-center">Add Task</h1>
-          <form action="{{route('save')}}" method="POST" enctype="multipart/form-data">
+          <h1 class="text-center">Edit Task</h1>
+          <form action="{{route('update', $task->id)}}" method="POST" enctype="multipart/form-data">
             @csrf
+            @method('PATCH')
             <div class="mb-3">
               <label for="" class="form-label">Title</label>
-              <input type="text" class="form-control" id="" name="title">
+              <input value="{{$task->title}}" type="text" class="form-control" id="" name="title">
             </div>
             <div class="mb-3">
               <label for="" class="form-label">Description</label>
-              <input type="text" class="form-control" id="" name="desc">
+              <input value="{{$task->desc}}" type="text" class="form-control" id="" name="desc">
             </div>
             <div class="mb-3">
                 <label for="" class="form-label">Due Date</label>
-                <input type="date" class="form-control" id="" name="dueDate">
+                <input value="{{$task->dueDate}}" type="date" class="form-control" id="" name="dueDate">
             </div>
+            
             <div class="mb-3">
               <label for="image" class="form-label">Image</label>
-              <input type="file" class="form-control" id="" name="image">
+              <input value="{{$task->image}}" type="file" class="form-control" id="" name="image">
             </div>
+
             <div class="mb-3">
-                <label for="status" class="form-label">Status</label>
-                <select class="form-select" id="status" name="status">
-                  <option value="Not Yet">Not Yet</option>
-                  <option value="On Going">On Going</option>
-                  <option value="Done">Done</option>
-                </select>
+              <label for="status" class="form-label">Status</label>
+              <select value="{{$task->status}}" class="form-select" id="status" name="status">
+                <option value="Not Yet">Not Yet</option>
+                <option value="On Going">On Going</option>
+                <option value="Done">Done</option>
+              </select>
             </div>
+
             <div class="mb-3">
               <label for="category" class="form-label">Category</label>
               <select class="form-select" name="categoryName">
@@ -60,7 +64,8 @@
                 @endforeach
               </select>
             </div>
-            <button type="submit" class="btn btn-primary">Add</button>
+
+            <button type="submit" class="btn btn-primary">Submit</button>
           </form>
     </div>
     

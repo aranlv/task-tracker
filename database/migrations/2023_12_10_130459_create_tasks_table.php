@@ -17,6 +17,12 @@ return new class extends Migration
             $table->string('desc');
             $table->date('dueDate');
             $table->string('status');
+            $table->string('image');
+
+            $table->unsignedBigInteger('categoryID');
+            $table->foreign('categoryID')->references('id')->on('categories')
+            ->onDelete('cascade')->onUpdate('cascade');
+
             $table->timestamps();
         });
     }

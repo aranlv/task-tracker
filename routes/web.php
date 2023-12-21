@@ -16,6 +16,9 @@ use App\Http\Controllers\TaskController;
 
 Route::get('/', [TaskController::class, 'view'])->name('view');
 Route::get('/add', [TaskController::class, 'add'])->name('add');
-
+Route::get('/edit/{id}', [TaskController::class, 'edit'])->name('edit');
+Route::patch('/update/{id}', [TaskController::class, 'update'])->name('update');
 Route::post('/', [TaskController::class, 'save'])->name('save');
+Route::delete('/delete/{id}', [TaskController::class, 'delete'])->name('delete');
+
 

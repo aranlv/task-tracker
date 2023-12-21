@@ -25,7 +25,7 @@
     </nav>
 
     <h1 class="text-center">View Tasks</h1>
-    <table class="table table-bordered">
+    {{-- <table class="table table-bordered">
         <thead>
             <tr>
                 <th>Status</th>
@@ -42,11 +42,53 @@
                   <td>{{$t->dueDate}}</td>
                   <td>{{$t->title}}</td>
                   <td>{{$t->desc}}</td>
-                  <td><a href="#" class="btn btn-primary">Go somewhere</a></td>
+                  <td>
+                    <a href="{{route('edit', $t->id)}}" class="btn btn-success">Edit</a>
+                    <form action="{{route('delete', $t->id)}}" method="POST">
+                        @csrf
+                        @method('delete')
+                        <button type="submit" class="btn btn-danger">Delete</button>
+                    </form>
+                  </td>
                 </tr>
             @endforeach
         </tbody>
-    </table>
+    </table> --}}
+
+    @foreach($categories as $category)
+        <h3 class="text-center">{{$category->categoryName}}</h1>
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th>Status</th>
+                    <th>Due Date</th>
+                    <th>Title</th>
+                    <th>Description and Image</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach($category->tasks as $task)
+                    <tr>
+                        <td>{{$task->status}}</td>
+                        <td>{{$task->dueDate}}</td>
+                        <td>{{$task->title}}</td>
+                        <td style="width: 18rem;">{{$task->desc}}
+                            <img src="{{asset('/storage/image/'.$task->image)}}" class="card-img-top" alt="...">
+                        </td>
+                        <td>
+                            <a href="{{route('edit', $task->id)}}" class="btn btn-success">Edit</a>
+                            <form action="{{route('delete', $task->id)}}" method="POST">
+                                @csrf
+                                @method('delete')
+                                <button type="submit" class="btn btn-danger">Delete</button>
+                            </form>
+                        </td>
+                    </tr>
+                @endforeach
+            </tbody>
+        </table>
+    @endforeach
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
 </body>
